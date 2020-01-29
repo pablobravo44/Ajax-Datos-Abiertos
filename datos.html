@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
+
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!-- LIBRERIAS PDF --> 
+    
+    <!-- LIBRERIAS PDF -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/sticky-header/bootstrap-table-sticky-header.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/carga.css">
+    <style>
+        /*PARA FLEX EN COLUMNAS GENERAL Y CENTRAR HIJOS DEL BODY*/
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-items: center;/*Coloco todos los hijos del body en columnas*/
+        }
+        body *{
+            margin-left: auto;
+            margin-right: auto;/*Centro horizontalmente todos los elementos hijos de body*/
+        }
+        /*PARA TABLA*/
+        #tabla_datos {
+            overflow-y: auto;
+            display: block;
+            width: 85%;
+            margin-top:20px;
+        }
+        #tabla_datos thead th{
+            position: sticky; 
+            top: 0;
+            text-align: center;
+        }
+        #tabla_datos tbody,td{
+            text-align: center;
+        }
+        #tabla_datos>table {
+            border:3px solid black;
+        }
+        /*PARA BOTONES DEBAJO DE LA TABLA*/
+        #botones {
+            margin-top:30px;
+            display: flex;
+            justify-content: center;
+        }
+        #botones button {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        button{
+            cursor: pointer;
+        }
+        /*PARA VENTANA MAPA*/
+        #mapa,html,body {
+            width: 100%;
+            height: 100%;
+        }
+        #mapa{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: none;
+            margin-left: auto;
+            margin-right: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        #mapa iframe{
+            width: 1000px;
+            height: 800px;
+        }
+        /*PARA DIV GRÁFICO*/
+        #grafico,#botones_campos{
+            width: 1800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:10px;
+            margin-bottom: 20px;
+        }
+        #botones_campos{
+            display:flex;
+            justify-content: center;
+        }
+        #botones_campos>button{
+            margin: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="table-responsive" id="tabla_datos"></div>
+    <div id="botones">
+            <button type="button" id="anteriores" class="btn btn-primary">Anteriores</button>
+            <button type="button" id="siguientes" class="btn btn-primary">Siguientes</button>
+            <a href="index.html"><button type="button" class="btn btn-danger" id="atras">VOLVER ATRÁS</button></a>
+            <button type="button" class="btn btn-dark" id="csv">Exportar consulta a csv</button>
+            <button type="button" class="btn btn-dark" id="json">Exportar consulta a JSON</button>
+            <a href="https://analisis.datosabiertos.jcyl.es/explore/dataset/catalogo-de-datos/table/?q=calidad+del+aire+datos" target="_blank"><button type="button" class="btn btn-info">Consultar Fuente</button></a>
+    </div>
+    <div class="card" style="width: 18rem;margin:0 auto ; margin-top: 25px; margin-bottom: 20px;">
+            <div class="card-body" id="info" style="max-height:170px;padding-top:5px;padding-bottom:5px;">
+            </div>
+    </div>
+    <div id="botones_campos">
+        <button type="button" class="btn btn-warning" id="campo1">CO mg/m3</button>
+        <button type="button" class="btn btn-warning" id="campo2">NO ug/m3</button>
+        <button type="button" class="btn btn-warning" id="campo3">NO2 ug/m3</button>
+        <button type="button" class="btn btn-warning" id="campo4">O3 ug/m3</button>
+        <button type="button" class="btn btn-warning" id="campo5">PM10 ug/m3</button>
+        <button type="button" class="btn btn-warning" id="campo6">PM25 ug/m3</button>
+        <button type="button" class="btn btn-warning" id="campo7">SO2 ug/m3</button>
+    </div>
+    <div id="grafico"></div>
+    <div id="mapa">
+        <span></span>
+    </div>
+    <script src="datos.js"></script>
+</body>
+
+</html>
